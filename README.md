@@ -4,8 +4,6 @@
 
 **SDG Alignment:** SDG 11 (Sustainable Cities & Communities) · SDG 3 (Good Health & Well-being)
 
-🔗 **Live Demo:** _add your GitHub Pages link here after deployment (see Deployment section below)_
-
 ---
 
 ## What is AirSense?
@@ -67,25 +65,6 @@ not just a diagram.
 | AI reasoning | Rule-based engine modeled on documented AQI health thresholds (default) **or** IBM Granite via watsonx.ai (optional, real integration included) |
 | AI development partner | IBM Bob (Project Bob) — see `docs/IBM_BOB_USAGE.md` |
 
-## Project Structure
-
-```
-AirSense-Project/
-├── index.html                  Main app page
-├── css/style.css                Styling (matches the pitch deck's brand palette)
-├── js/
-│   ├── app.js                   UI wiring, live API calls
-│   ├── promptEngine.js          AI prompt construction + local reasoning engine
-│   └── graniteConnector.js      Optional real IBM Granite (watsonx.ai) integration
-├── docs/
-│   ├── IBM_BOB_USAGE.md         How to use IBM Bob to extend this project
-│   ├── GRANITE_INTEGRATION.md   How to wire up a real Granite model
-│   ├── RESPONSIBLE_AI.md        Fairness / Transparency / Ethics / Privacy notes
-│   └── SDG_MAPPING.md           Detailed SDG 11 & SDG 3 alignment
-├── screenshots/                 Add your own screenshots here after running the app
-└── README.md
-```
-
 ## Running Locally
 
 No build tools, no `npm install`, no server required:
@@ -103,28 +82,6 @@ No build tools, no `npm install`, no server required:
 3. Search for any city, fill in your profile, click **Ask AirSense**
 
 That's it — it fetches real live AQI data immediately.
-
-## Deployment (free, public live demo link)
-
-The fastest way to get a public URL for your submission form:
-
-1. Push this folder to a new GitHub repository (see commands below)
-2. In the repo, go to **Settings → Pages**
-3. Under **Source**, choose `main` branch, `/ (root)` folder → **Save**
-4. GitHub will give you a live URL like `https://<your-username>.github.io/<repo-name>/`
-5. Add that URL to the top of this README and to your project submission form
-
-### Pushing to GitHub
-
-```bash
-cd AirSense-Project
-git init
-git add .
-git commit -m "Initial commit: AirSense AI air quality assistant"
-git branch -M main
-git remote add origin https://github.com/<your-username>/airsense-project.git
-git push -u origin main
-```
 
 ## Responsible AI
 
