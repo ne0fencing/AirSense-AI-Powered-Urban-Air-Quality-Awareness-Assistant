@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>AirSense — AI-Powered Urban Air Quality Awareness Assistant</title>
+<meta name="description" content="AirSense uses live air quality data and AI prompt engineering to give citizens personalized, health-conscious guidance about the air they breathe." />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ───────────── HEADER ───────────── -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <div class="brand-mark">AS</div>
+        <div>
+          <h1>AirSense</h1>
+          <p class="tagline">Breathe Smart. Live Better.</p>
+        </div>
+      </div>
+      <div class="sdg-badges">
+        <span class="badge badge-sdg11">SDG 11</span>
+        <span class="badge badge-sdg3">SDG 3</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ───────────── INTRO ───────────── -->
+    <section class="intro">
+      <h2>Ask AirSense about the air you breathe</h2>
+      <p>
+        AirSense retrieves <strong>live air quality data</strong> for any city worldwide and uses an
+        AI prompt-engineering pipeline (designed for IBM Granite via watsonx.ai) to generate
+        personalized health guidance — grounded in real data, not guesses.
+      </p>
+    </section>
+
+    <!-- ───────────── INPUT PANEL ───────────── -->
+    <section class="panel input-panel">
+      <h3>1 · Tell AirSense about your situation</h3>
+
+      <div class="form-grid">
+        <div class="field">
+          <label for="citySearch">City</label>
+          <input type="text" id="citySearch" placeholder="e.g. Kolkata, Delhi, London..." autocomplete="off" />
+          <div id="citySuggestions" class="suggestions hidden"></div>
+        </div>
+
+        <div class="field">
+          <label for="ageGroup">Age Group</label>
+          <select id="ageGroup">
+            <option value="child">Child (0–12)</option>
+            <option value="teen">Teen (13–18)</option>
+            <option value="adult" selected>Adult (19–59)</option>
+            <option value="elderly">Elderly (60+)</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="healthCondition">Health Condition</label>
+          <select id="healthCondition">
+            <option value="none" selected>None / Generally healthy</option>
+            <option value="asthma">Asthma</option>
+            <option value="heart">Heart condition</option>
+            <option value="respiratory">Other respiratory condition</option>
+            <option value="pregnant">Pregnant</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="activity">Planned Activity</label>
+          <select id="activity">
+            <option value="outdoor_exercise">Outdoor exercise / jogging</option>
+            <option value="commute" selected>Commuting</option>
+            <option value="outdoor_leisure">Outdoor leisure / walk</option>
+            <option value="indoor">Mostly indoors today</option>
+          </select>
+        </div>
+      </div>
+
+      <button id="askBtn" class="btn-primary">
+        <span id="askBtnText">Ask AirSense</span>
+      </button>
+      <p id="errorMsg" class="error-msg hidden"></p>
+    </section>
+
+    <!-- ───────────── RETRIEVED DATA (RAG) PANEL ───────────── -->
+    <section id="dataPanel" class="panel data-panel hidden">
+      <h3>2 · Retrieved Data <span class="muted">(live, fetched just now)</span></h3>
+      <div id="dataGrid" class="data-grid"></div>
+      <p class="source-note" id="sourceNote"></p>
+    </section>
+
+    <!-- ───────────── AI RESPONSE PANEL ───────────── -->
+    <section id="responsePanel" class="panel response-panel hidden">
+      <h3>3 · AirSense Response <span class="muted" id="engineTag"></span></h3>
+      <div id="responseContent" class="response-content"></div>
+    </section>
+
+    <!-- ───────────── PROMPT TRANSPARENCY PANEL ───────────── -->
+    <section id="promptPanel" class="panel prompt-panel hidden">
+      <h3>🔍 How this answer was generated <span class="muted">(transparency)</span></h3>
+      <details>
+        <summary>View the structured prompt sent to the AI model</summary>
+        <pre id="promptDump"></pre>
+      </details>
+    </section>
+
+    <!-- ───────────── SETTINGS (OPTIONAL GRANITE INTEGRATION) ───────────── -->
+    <section class="panel settings-panel">
+      <details>
+        <summary>⚙️ Advanced: Connect a real IBM Granite model (optional)</summary>
+        <div class="settings-body">
+          <p>
+            By default, AirSense uses a local rule-based reasoning engine (<code>js/promptEngine.js</code>)
+            so the demo works instantly with no API key. To use a <strong>real IBM Granite model</strong>
+            via watsonx.ai instead, enter your credentials below. See
+            <code>docs/IBM_BOB_USAGE.md</code> and <code>docs/GRANITE_INTEGRATION.md</code> for full setup
+            instructions, including why a backend proxy is recommended for production use.
+          </p>
+          <div class="form-grid">
+            <div class="field">
+              <label for="wxApiKey">watsonx.ai API Key</label>
+              <input type="password" id="wxApiKey" placeholder="Optional — leave blank to use local engine" />
+            </div>
+            <div class="field">
+              <label for="wxProjectId">Project ID</label>
+              <input type="text" id="wxProjectId" placeholder="watsonx.ai project ID" />
+            </div>
+          </div>
+          <label class="checkbox-label">
+            <input type="checkbox" id="useGranite" />
+            Use live Granite model for next query (falls back to local engine on error)
+          </label>
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>AirSense — Built for the 1M1B AI for Sustainability Virtual Internship (IBM SkillsBuild &amp; AICTE)</p>
+      <p class="muted">Live AQI data: Open-Meteo Air Quality API · Geocoding: Open-Meteo Geocoding API</p>
+    </div>
+  </footer>
+
+  <script src="js/promptEngine.js"></script>
+  <script src="js/graniteConnector.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
